@@ -1,0 +1,31 @@
+{% extends 'usuarios/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Log-in
+{% endblock title %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+</style>
+<p> </p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Iniciar sesion </button>
+    <p></p>
+    <a class="btn btn-primary" href="{% url 'Register' %}">Registrarse</a>
+</form>
+
+<p> </p>
+{% endblock main %}

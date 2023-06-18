@@ -1,0 +1,28 @@
+{% extends 'usuarios/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Registro
+{% endblock title %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+</style>
+<p> </p>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrate!</button>
+</form>
+
+<p> </p>
+{% endblock main %}

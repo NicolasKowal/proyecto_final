@@ -1,0 +1,29 @@
+{% extends 'usuarios/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Logout
+{% endblock title %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+</style>
+<p> </p>
+
+<h1>Te has deslogueado...</h1>
+
+<a class="btn btn-primary" href="{% url 'Login' %}">Login</a>
+<a class="btn btn-primary" href="{% url 'Register' %}">Registrate</a>
+
+
+<p> </p>
+{% endblock main %}
