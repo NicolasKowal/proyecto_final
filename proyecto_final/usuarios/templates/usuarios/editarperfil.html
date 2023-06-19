@@ -1,33 +1,25 @@
-{% extends 'usuarios/base.html' %}
+{% extends 'usuarios/index.html' %} {% load static %} {% block title %}
+Formulario - Editar Perfil {% endblock title %} {% block main %}
+<style>
+  body {
+    margin: 20px;
+    background-size: cover;
+  }
 
-{% load static %}
+  td {
+    padding: 10px;
+    line-height: 1.5;
+  }
+</style>
 
-{% block title %}
-    edit
-{% endblock title %}
+<form action="" method="POST">
+  {% csrf_token %}
 
-{% block main %}
+  <table>
+    {{ miFormulario.as_table }}
+  </table>
 
-
-    <!--Aquí va lo que cambia, y lo asociado a está vista :) -->
-    <h1>Formulario - Editar Perfil</h1>
-    <h1>De {{usuario}}</h1>
-    
-
-    <form action="" method="POST">{% csrf_token %}
-
-        <!-- Acá está la magia de Django-->
-        
-        <table>
-
-            {{ miFormulario.as_table }}
-
-        </table>
-
-        <input type="submit", value="Enviar">
-
-    </form>  
-
-
+  <input type="submit" , value="Enviar" />
+</form>
 
 {% endblock main %}

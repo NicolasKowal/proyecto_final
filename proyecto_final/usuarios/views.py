@@ -41,31 +41,12 @@ def register(request):
                 user = form.save(commit=False)
                 user.set_password(password1)
                 user.save()
-                return render(request, "usuarios/base.html", {"mensaje": username})
+                return render(request, "usuarios/index.html", {"mensaje": username})
             else:
                 form.add_error('password2', 'Las contraseñas no coinciden.')
     else:
         form = UserRegisterForm()
     return render(request, "usuarios/registro.html", {"form": form})
-
-
-# @login_required
-# def editarPerfil(request):
-#     usuario = request.user
-#     if request.method == 'POST':
-#         miFormulario = UserEditForm(request.POST)
-#         if miFormulario.is_valid():
-#             informacion = miFormulario.cleaned_data
-#             usuario.email = informacion['email']
-#             usuario.password1 = informacion['password1']
-#             usuario.password2 = informacion['password2']
-#             usuario.last_name = informacion['last_name']
-#             usuario.first_name = informacion['first_name']
-#             usuario.save()
-#             return render(request, "usuarios/base.html")
-#     else:
-#         miFormulario = UserEditForm(initial={'email': usuario.email})
-#     return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
 
 
 @login_required
@@ -80,7 +61,7 @@ def editarPerfil(request):
             usuario.last_name = informacion['last_name']
             usuario.first_name = informacion['first_name']
             usuario.save()
-            return render(request, 'usuarios/base.html')
+            return render(request, 'usuarios/index.html')
     else:
         miFormulario = UserEditForm(initial={'email': usuario.email})
     return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
@@ -93,4 +74,8 @@ def main(request):
     context = {
         'avatar_url': avatar_url
     }
-    return render(request, 'usuarios/base.html', context)
+    return render(request, 'usuarios/index.html', context)
+
+
+def index(request):
+    return render(request, 'usuarios/index.html')

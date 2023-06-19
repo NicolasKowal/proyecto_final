@@ -1,9 +1,17 @@
-{% load static %}
+{% extends 'usuarios/index.html' %} {% load static %} {% block title %}
+Formulario - Editar Perfil {% endblock title %} {% block main %}
+<style>
+  body {
+    margin: 20px;
+    background-size: cover;
+  }
 
-{% block title %}
-    {{mensaje}}
-{% endblock title %}
+  td {
+    padding: 10px;
+    line-height: 1.5;
+  }
+</style>
 
-{% block main %} 
+{{mensaje}}
 
-{% endblock %}
+{% endblock main %}
