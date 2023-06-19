@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
@@ -11,13 +11,14 @@ from .forms import UserRegisterForm, UserEditForm
 
 from django.contrib.auth.models import User
 
+
 def login_request(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data = request.POST)
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():  # Si pasó la validación de Django
             usuario = form.cleaned_data.get('username')
             contra = form.cleaned_data.get('password')
-            user = authenticate(username= usuario, password=contra)
+            user = authenticate(username=usuario, password=contra)
             if user is not None:
                 login(request, user)
                 return render(request, "usuarios/base.html", {"mensaje": f"Bienvenido {usuario}"})
@@ -27,19 +28,6 @@ def login_request(request):
             return render(request, "usuarios/base.html", {"mensaje": "Formulario erroneo"})
     form = AuthenticationForm()
     return render(request, "usuarios/login.html", {"form": form})
-
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserRegisterForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             form.save()
-#             return render(request,"usuarios/base.html" ,  {"mensaje" : username})
-#     else:
-#         form = UserRegisterForm()     
-#     return render(request,"usuarios/registro.html" ,  {"form":form})
-
-
 
 
 def register(request):
@@ -61,8 +49,23 @@ def register(request):
     return render(request, "usuarios/registro.html", {"form": form})
 
 
-
-
+# @login_required
+# def editarPerfil(request):
+#     usuario = request.user
+#     if request.method == 'POST':
+#         miFormulario = UserEditForm(request.POST)
+#         if miFormulario.is_valid():
+#             informacion = miFormulario.cleaned_data
+#             usuario.email = informacion['email']
+#             usuario.password1 = informacion['password1']
+#             usuario.password2 = informacion['password2']
+#             usuario.last_name = informacion['last_name']
+#             usuario.first_name = informacion['first_name']
+#             usuario.save()
+#             return render(request, "usuarios/base.html")
+#     else:
+#         miFormulario = UserEditForm(initial={'email': usuario.email})
+#     return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
 
 
 @login_required
@@ -73,12 +76,11 @@ def editarPerfil(request):
         if miFormulario.is_valid():
             informacion = miFormulario.cleaned_data
             usuario.email = informacion['email']
-            usuario.password1 = informacion['password1']
-            usuario.password2 = informacion['password2']
+            usuario.set_password(informacion['password1'])
             usuario.last_name = informacion['last_name']
             usuario.first_name = informacion['first_name']
             usuario.save()
-            return render(request, "usuarios/base.html")
+            return render(request, 'usuarios/base.html')
     else:
         miFormulario = UserEditForm(initial={'email': usuario.email})
     return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
@@ -91,5 +93,4 @@ def main(request):
     context = {
         'avatar_url': avatar_url
     }
-    # muestra la pagina main
     return render(request, 'usuarios/base.html', context)
