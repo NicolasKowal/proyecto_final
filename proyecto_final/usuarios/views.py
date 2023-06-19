@@ -14,19 +14,32 @@ from django.contrib.auth.models import User
 def login_request(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data = request.POST)
-        if form.is_valid():
+        if form.is_valid():  # Si pasó la validación de Django
             usuario = form.cleaned_data.get('username')
-            contrasenia = form.cleaned_data.get('password')
-            user = authenticate(username= usuario, password=contrasenia)
+            contra = form.cleaned_data.get('password')
+            user = authenticate(username= usuario, password=contra)
             if user is not None:
                 login(request, user)
-                return render(request, "usuarios/base.html", {"mensaje":f"Bienvenido {usuario}"})
+                return render(request, "usuarios/base.html", {"mensaje": f"Bienvenido {usuario}"})
             else:
-                return render(request, "usuarios/base.html", {"mensaje":"Datos incorrectos"})
+                return render(request, "usuarios/base.html", {"mensaje": "Datos incorrectos"})
         else:
-            return render(request, "usuarios/base.html", {"mensaje":"Formulario erroneo"})
+            return render(request, "usuarios/base.html", {"mensaje": "Formulario erroneo"})
     form = AuthenticationForm()
     return render(request, "usuarios/login.html", {"form": form})
+
+# def register(request):
+#     if request.method == 'POST':
+#         form = UserRegisterForm(request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data['username']
+#             form.save()
+#             return render(request,"usuarios/base.html" ,  {"mensaje" : username})
+#     else:
+#         form = UserRegisterForm()     
+#     return render(request,"usuarios/registro.html" ,  {"form":form})
+
+
 
 
 def register(request):
@@ -34,11 +47,22 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
-            form.save()
-            return render(request,"usuarios/base.html" ,  {"mensaje" : username})
-    else:    
-        form = UserRegisterForm()     
-    return render(request,"usuarios/registro.html" ,  {"form":form})
+            password1 = form.cleaned_data['password1']
+            password2 = form.cleaned_data['password2']
+            if password1 == password2:
+                user = form.save(commit=False)
+                user.set_password(password1)
+                user.save()
+                return render(request, "usuarios/base.html", {"mensaje": username})
+            else:
+                form.add_error('password2', 'Las contraseñas no coinciden.')
+    else:
+        form = UserRegisterForm()
+    return render(request, "usuarios/registro.html", {"form": form})
+
+
+
+
 
 
 @login_required
@@ -59,6 +83,7 @@ def editarPerfil(request):
         miFormulario = UserEditForm(initial={'email': usuario.email})
     return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
 
+
 def main(request):
     avatar = Avatar.objects.filter(user=request.user.id).first()
     avatar_url = avatar.imagen.url if avatar else None
@@ -66,4 +91,5 @@ def main(request):
     context = {
         'avatar_url': avatar_url
     }
-    return render(request, 'usuarios/base.html', context)#muestra la pagina main
+    # muestra la pagina main
+    return render(request, 'usuarios/base.html', context)

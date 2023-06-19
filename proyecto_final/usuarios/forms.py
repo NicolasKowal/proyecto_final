@@ -16,13 +16,9 @@ class UserRegisterForm(forms.ModelForm):
 
 # Clase 24, agregamos el UserEditForm
 class UserEditForm(UserRegisterForm):
-
-    # Obligatorios
     email = forms.EmailField(label="Ingrese su email:")
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
-    password2 = forms.CharField(
-        label='Repetir la contraseña', widget=forms.PasswordInput)
-
+    password2 = forms.CharField(label='Repetir la contraseña', widget=forms.PasswordInput)
     last_name = forms.CharField()
     first_name = forms.CharField()
 
