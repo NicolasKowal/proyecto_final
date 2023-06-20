@@ -1,0 +1,63 @@
+{% extends 'usuarios/index.html' %} {% load static %} {% block title %}
+Formulario - Editar Perfil {% endblock title %} {% block main %}
+<style>
+  body {
+    margin: 20px;
+    background-size: cover;
+  }
+
+  td {
+    padding: 10px;
+    line-height: 1.5;
+  }
+</style>
+
+<section class="hero">
+  <div class="hero-content">
+      <h2 class="hero-title">¡Bienvenido a nuestra página de adopción de mascotas!</h2>
+      <p class="hero-description">Aquí puedes encontrar una amplia variedad de perros, gatos y otras mascotas esperando encontrar un hogar amoroso. Nuestra plataforma está diseñada para conectar a personas que desean adoptar una mascota con animales rescatados que necesitan un nuevo hogar.</p>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+      <img src="dog.jpg" alt="Perros" class="feature-image">
+      <h3 class="feature-title">Perros</h3>
+      <p class="feature-description">Descubre perfiles detallados de perros disponibles para adopción. Encuentra tu compañero peludo ideal.</p>
+  </div>
+  <div class="feature">
+      <img src="cat.jpg" alt="Gatos" class="feature-image">
+      <h3 class="feature-title">Gatos</h3>
+      <p class="feature-description">Explora gatos adorables en busca de un hogar. Encuentra a tu compañero felino perfecto.</p>
+  </div>
+  <div class="feature">
+      <img src="other.jpg" alt="Otras Mascotas" class="feature-image">
+      <h3 class="feature-title">Otras Mascotas</h3>
+      <p class="feature-description">Descubre una variedad de otras mascotas como conejos, pájaros y reptiles en busca de un hogar amoroso.</p>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <h2 class="section-title">¿Cómo funciona?</h2>
+  <div class="step">
+      <img src="search.jpg" alt="Buscar" class="step-image">
+      <h3 class="step-title">Busca</h3>
+      <p class="step-description">Explora nuestros perfiles de mascotas y filtra según tus preferencias para encontrar la mascota perfecta para ti.</p>
+  </div>
+  <div class="step">
+      <img src="apply.jpg" alt="Solicita" class="step-image">
+      <h3 class="step-title">Solicita</h3>
+      <p class="step-description">Completa nuestro formulario de solicitud de adopción y envíalo para consideración.</p>
+  </div>
+  <div class="step">
+      <img src="adopt.jpg" alt="Adopta" class="step-image">
+      <h3 class="step-title">Adopta</h3>
+      <p class="step-description">Una vez aprobada tu solicitud, podrás llevar a tu nueva mascota a su nuevo hogar.</p>
+  </div>
+</section>
+
+
+
+
+
+{% endblock main %}

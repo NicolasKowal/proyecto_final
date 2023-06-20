@@ -79,4 +79,4 @@ def main(request):
 
 
 def index(request):
-    return render(request, 'usuarios/base.html')
+    return render(request, 'usuarios/pagina_principal.html')
