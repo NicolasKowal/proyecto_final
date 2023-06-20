@@ -58,12 +58,13 @@ def editarPerfil(request):
             informacion = miFormulario.cleaned_data
             usuario.email = informacion['email']
             usuario.set_password(informacion['password1'])
-            usuario.last_name = informacion['last_name']
             usuario.first_name = informacion['first_name']
+            usuario.last_name = informacion['last_name']
             usuario.save()
             return render(request, 'usuarios/index.html')
     else:
-        miFormulario = UserEditForm(initial={'email': usuario.email})
+        miFormulario = UserEditForm(initial={'email': usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
+
     return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
 
 
