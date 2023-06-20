@@ -71,10 +71,10 @@ def main(request):
     avatar = Avatar.objects.filter(user=request.user.id).first()
     avatar_url = avatar.imagen.url if avatar else None
 
-    context = {
-        'avatar_url': avatar_url
-    }
-    return render(request, 'usuarios/pagina_principal.html', context)
+    # context = {
+    #     'avatar_url': avatar_url
+    # }
+    return render(request, 'usuarios/pagina_principal.html')
 
 
 def index(request):
