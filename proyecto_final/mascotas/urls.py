@@ -19,4 +19,3 @@ urlpatterns = [
     path('eliminarGato/<pk>/', views.GatoDelete.as_view(), name="eliminar gato"),
     path('eliminarOtro/<pk>/', views.OtroDelete.as_view(), name="eliminar otro"),
 ]
-

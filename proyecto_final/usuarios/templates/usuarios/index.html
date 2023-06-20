@@ -22,7 +22,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'index' %}"> <strong style="font-size: larger;">Adopcion de mascotas</strong> </a>
+                <a class="navbar-brand" href="{% url 'main' %}"> <strong style="font-size: larger;">Adopcion de mascotas</strong> </a>
                 <div class="float-right">
 
                 <a class="btn btn-primary" href="#signup" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Conocenos</a>
@@ -39,8 +39,7 @@
                 <a class="btn btn-primary" href="{% url 'EditarPerfil' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Mi perfil</a>
                 <a class="btn btn-primary" href="{% url 'List' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">DDD</a>
                 <a class="btn btn-primary" href="{% url 'Logout' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Logout</a>
-                <p class= "text large mb-4 mb-lg-0"> {{request.user.username}} 
-                <img height="40px" src="{{ avatar_url }}"> </p>
+                <a class= "text large mb-4 mb-lg-0"> {{request.user.username}} {{request.user.avatar.url}} <img height="40px" src="{{ avatar_url }}"> </a>
                 {% endif %}
 
                 </div>

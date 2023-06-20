@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 def login_request(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():  # Si pasó la validación de Django
+        if form.is_valid():
             usuario = form.cleaned_data.get('username')
             contra = form.cleaned_data.get('password')
             user = authenticate(username=usuario, password=contra)
@@ -29,7 +29,6 @@ def login_request(request):
     form = AuthenticationForm()
     return render(request, "usuarios/login.html", {"form": form})
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -41,7 +40,7 @@ def register(request):
                 user = form.save(commit=False)
                 user.set_password(password1)
                 user.save()
-                return render(request, "usuarios/index.html", {"mensaje": username})
+                return render(request, "usuarios/pagina_principal.html", {"mensaje": username})
             else:
                 form.add_error('password2', 'Las contraseñas no coinciden.')
     else:
@@ -58,12 +57,13 @@ def editarPerfil(request):
             informacion = miFormulario.cleaned_data
             usuario.email = informacion['email']
             usuario.set_password(informacion['password1'])
-            usuario.last_name = informacion['last_name']
             usuario.first_name = informacion['first_name']
+            usuario.last_name = informacion['last_name']
             usuario.save()
-            return render(request, 'usuarios/index.html')
+            return render(request, 'usuarios/pagina_principal.html')
     else:
-        miFormulario = UserEditForm(initial={'email': usuario.email})
+        miFormulario = UserEditForm(initial={'email': usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
+
     return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
 
 
@@ -74,8 +74,8 @@ def main(request):
     context = {
         'avatar_url': avatar_url
     }
-    return render(request, 'usuarios/index.html', context)
+    return render(request, 'usuarios/pagina_principal.html', context)
 
 
 def index(request):
-    return render(request, 'usuarios/base.html')
+    return render(request, 'usuarios/pagina_principal.html')
