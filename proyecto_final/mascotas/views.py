@@ -5,8 +5,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .models import *
-from .forms import *
+from mascotas.models import Mascota
+from mascotas.forms import NuevaMascotaForm, EditarMascotaForm
 
 # REGISTRO DE MASCOTA
 class CrearMascota(LoginRequiredMixin, CreateView):
@@ -14,13 +14,17 @@ class CrearMascota(LoginRequiredMixin, CreateView):
     form_class = NuevaMascotaForm
     success_url = reverse_lazy('mascotas')
     template_name = 'mascotas/registroMascota.html'
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CrearMascota, self).form_valid(form)
 
 
 
 # CRUD PERROS
 class PerroList(LoginRequiredMixin, ListView):
     context_object_name = 'perros'
-    queryset = Mascota.objects.filter(especie_startswith= 'perro')
+    queryset = Mascota.objects.filter(especie__startswith= 'perro')
     template_name = 'mascotas/listaPerros.html'
     
 class PerroDetail(LoginRequiredMixin, DetailView):
@@ -46,7 +50,7 @@ class PerroDelete(LoginRequiredMixin, DeleteView):
 # CRUD GATOS
 class GatoList(LoginRequiredMixin, ListView):
     context_object_name = 'gatos'
-    queryset = Mascota.objects.filter(especie_startswith= 'gato')
+    queryset = Mascota.objects.filter(especie__startswith= 'gato')
     template_name = 'mascotas/listaGatos.html'
     
 class GatoDetail(LoginRequiredMixin, DetailView):
@@ -72,7 +76,7 @@ class GatoDelete(LoginRequiredMixin, DeleteView):
 # CRUD OTROS
 class OtroList(LoginRequiredMixin, ListView):
     context_object_name = 'otros'
-    queryset = Mascota.objects.filter(especie_startswith= 'otro')
+    queryset = Mascota.objects.filter(especie__startswith= 'otro')
     template_name = 'mascotas/listaOtros.html'
     
 class OtroDetail(LoginRequiredMixin, DetailView):

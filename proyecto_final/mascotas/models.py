@@ -13,6 +13,7 @@ class Mascota(models.Model):
     titulo = models.CharField(max_length=200)
     especie = models.CharField(max_length=15, choices=especieSeleccion, default='otro')
     edad = models.IntegerField()
+    descripcion = models.CharField(max_length=400)
     fechaPublicacion = models.DateTimeField(auto_now_add=True)
     telefonoContacto = models.IntegerField()
     emailContacto = models.EmailField()
