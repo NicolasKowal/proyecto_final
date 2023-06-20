@@ -1,0 +1,40 @@
+{% extends 'usuarios/index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Editar perfil
+{% endblock title %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+        
+</style>
+
+{% for elemento in object_list %}
+
+
+<li> <p> NOMBRE: {{ elemento.username }} </p>
+    <p>
+    <a href="{% url 'Detail' elemento.id %}"> Ver </a>
+    <a href="{% url 'Edit' elemento.id %}"> Editar </a>
+    <a href="{% url 'Delete' elemento.id %}"> Borrar </a>
+    </p>
+</li>
+
+{% endfor %}
+
+{%endblock main%}

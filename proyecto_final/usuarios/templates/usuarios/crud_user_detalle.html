@@ -1,0 +1,27 @@
+{% extends 'usuarios/index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Editar perfil
+{% endblock title %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+</style>
+
+
+    <p> <i>  {{ object.nombre }}  </i></p>
+    <p>
+    <a href="{% url 'List'  %}"> Regresar </a>
+    </p>
+
+{%endblock main%}

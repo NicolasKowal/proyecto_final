@@ -1,0 +1,28 @@
+{% extends 'usuarios/index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Editar perfil
+{% endblock title %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+</style>
+
+<form method="POST">
+    {% csrf_token  %}
+    ¿Estás seguro que deseas borrar "{{ object.username }}"?
+    <input type="submit" value="Confirmar" />
+</form>
+
+
+{%endblock main%}
