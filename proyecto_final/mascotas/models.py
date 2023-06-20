@@ -16,7 +16,7 @@ class Mascota(models.Model):
     fechaPublicacion = models.DateTimeField(auto_now_add=True)
     telefonoContacto = models.IntegerField()
     emailContacto = models.EmailField()
-    imagenMascota = models.ImageField(null=True, blank=True, upload_to="imagenes/")
+    imagenMascota = models.ImageField(null=True, blank=True, upload_to="media/imagenes/")
     
     def __str__(self):
         return f" {self.titulo} \n- Especie: {self.especie} \n- Publicado: {self.fechaPublicacion}\n- Usuario: {self.usuario}"

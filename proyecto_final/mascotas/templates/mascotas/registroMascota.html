@@ -1,0 +1,30 @@
+{% extends 'usuarios/index.html' %}
+
+{% load static %}
+
+{% block title %}
+    Publicá tu mascota
+{% endblock %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+</style>
+<p> </p>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Registrala!</button>
+</form>
+
+<p> </p>
+
+<p> </p>
+{% endblock main %}

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from usuarios import views, viewscrud
 from django.contrib.auth.views import LogoutView
 
@@ -7,7 +7,7 @@ urlpatterns = [
     path('register', views.register, name='Register'),
     path('logout', LogoutView.as_view(template_name='usuarios/logout.html'), name='Logout'),
     path('editarPerfil', views.editarPerfil, name="EditarPerfil"), 
-    
+    path('mascotas', include('mascotas.urls')),
     path('', views.index, name= 'index')
 ]
 
