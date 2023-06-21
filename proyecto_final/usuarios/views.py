@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect
 
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from django.shortcuts import render
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Avatar
-from .forms import UserRegisterForm, UserEditForm
+from .forms import UserRegisterForm, EditarPerfil, EditPassword
 
 from django.contrib.auth.models import User
 
@@ -29,6 +29,7 @@ def login_request(request):
     form = AuthenticationForm()
     return render(request, "usuarios/login.html", {"form": form})
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -48,34 +49,35 @@ def register(request):
     return render(request, "usuarios/registro.html", {"form": form})
 
 
-@login_required
-def editarPerfil(request):
-    usuario = request.user
-    if request.method == 'POST':
-        miFormulario = UserEditForm(request.POST)
-        if miFormulario.is_valid():
-            informacion = miFormulario.cleaned_data
-            usuario.email = informacion['email']
-            usuario.set_password(informacion['password1'])
-            usuario.first_name = informacion['first_name']
-            usuario.last_name = informacion['last_name']
-            usuario.save()
-            return render(request, 'usuarios/pagina_principal.html')
-    else:
-        miFormulario = UserEditForm(initial={'email': usuario.email, 'first_name': usuario.first_name, 'last_name': usuario.last_name})
-
-    return render(request, "usuarios/editarPerfil.html", {"miFormulario": miFormulario, "usuario": usuario})
-
-
 def main(request):
-    avatar = Avatar.objects.filter(user=request.user.id).first()
-    avatar_url = avatar.imagen.url if avatar else None
-
-    # context = {
-    #     'avatar_url': avatar_url
-    # }
     return render(request, 'usuarios/pagina_principal.html')
 
 
 def index(request):
-    return render(request, 'usuarios/pagina_principal.html')
+    return render(request, 'usuarios/index.html')
+
+
+@login_required
+def editarPerfil(request):
+    if request.method == 'POST':
+        form = EditarPerfil(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else:
+        form = EditarPerfil(instance=request.user)
+
+    return render(request, 'usuarios/editarperfil.html', {'form': form})
+
+
+@login_required
+def editarPass(request):
+    if request.method == 'POST':
+        form = EditPassword(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else:
+        form = EditPassword(instance=request.user)
+
+    return render(request, 'usuarios/editarpassw.html', {'form': form})
