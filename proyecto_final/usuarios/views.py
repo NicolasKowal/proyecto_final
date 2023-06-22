@@ -81,3 +81,27 @@ def editarPass(request):
         form = EditPassword(instance=request.user)
 
     return render(request, 'usuarios/editarpassw.html', {'form': form})
+
+
+
+
+
+
+from django.shortcuts import render, redirect
+from .forms import AvatarForm
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def cambiarAvatar(request):
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            avatar = form.save(commit=False)
+            avatar.user = request.user
+            avatar.save()
+        return redirect('main') 
+
+    else:
+        form = AvatarForm(instance=request.user)
+
+    return render(request, 'usuarios/cambiar_avatar.html', {'form': form})
