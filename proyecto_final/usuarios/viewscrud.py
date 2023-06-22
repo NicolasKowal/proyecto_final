@@ -5,13 +5,16 @@ from django.urls import reverse_lazy
 
 from django.contrib.auth.models import User
 
+
 class User_List(ListView):
-    model = User 
+    model = User
     template_name = "usuarios/crud_user_list.html"
+
 
 class User_Detail(DetailView):
     model = User
     template_name = "usuarios/crud_user_detalle.html"
+
 
 class User_View(CreateView):
     ...
@@ -19,11 +22,13 @@ class User_View(CreateView):
     # success_url = reverse_lazy('List')
     # fields = [' ', ' ']
 
+
 class User_Update(UpdateView):
     model = User
     success_url = reverse_lazy('List')
     template_name = 'usuarios/crud_user_form.html'
     fields = ['first_name', 'last_name', 'password', 'email']
+
 
 class User_Delete(DeleteView):
     model = User
