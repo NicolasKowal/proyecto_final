@@ -7,9 +7,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Avatar
-from .forms import UserRegisterForm, EditarPerfil, EditPassword
+from .forms import UserRegisterForm, EditarPerfil, EditPassword, AvatarForm
 
 from django.contrib.auth.models import User
+
 
 
 def login_request(request):
@@ -37,6 +38,7 @@ def register(request):
             username = form.cleaned_data['username']
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
+            user.avatar.save('avatar.jpg')
             if password1 == password2:
                 user = form.save(commit=False)
                 user.set_password(password1)
@@ -83,25 +85,18 @@ def editarPass(request):
     return render(request, 'usuarios/editarpassw.html', {'form': form})
 
 
-
-
-
-
-from django.shortcuts import render, redirect
-from .forms import AvatarForm
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def cambiarAvatar(request):
     if request.method == 'POST':
         form = AvatarForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            avatar = form.save(commit=False)
-            avatar.user = request.user
-            avatar.save()
-        return redirect('main') 
-
+            avatar_anterior=Avatar.objects.filter(user=request.user)
+            if (len(avatar_anterior) > 0):
+                avatar_anterior.delete()
+            avatar_nuevo = Avatar(user = request.user, imagen = form.cleaned_data["avatar"])
+            avatar_nuevo.save()
+            return redirect('main')
     else:
         form = AvatarForm(instance=request.user)
-
-    return render(request, 'usuarios/cambiar_avatar.html', {'form': form})
+    
+    return render(request, 'usuarios/cambiar_avatar.html', {'form': form} )
