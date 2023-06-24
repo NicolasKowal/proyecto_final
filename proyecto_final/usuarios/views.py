@@ -38,7 +38,6 @@ def register(request):
             username = form.cleaned_data['username']
             password1 = form.cleaned_data['password1']
             password2 = form.cleaned_data['password2']
-            user.avatar.save('avatar.jpg')
             if password1 == password2:
                 user = form.save(commit=False)
                 user.set_password(password1)
@@ -48,6 +47,7 @@ def register(request):
                 form.add_error('password2', 'Las contraseñas no coinciden.')
     else:
         form = UserRegisterForm()
+     
     return render(request, "usuarios/registro.html", {"form": form})
 
 
