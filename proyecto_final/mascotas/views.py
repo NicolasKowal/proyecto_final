@@ -6,94 +6,63 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from mascotas.models import Mascota
-from mascotas.forms import NuevaMascotaForm, EditarMascotaForm
+from mascotas.forms import EditarMascotaForm #NuevaMascotaForm
 
-# REGISTRO DE MASCOTA
+# CRUD MASCOTA
 class CrearMascota(LoginRequiredMixin, CreateView):
     model = Mascota
-    form_class = NuevaMascotaForm
-    success_url = reverse_lazy('mascotas')
     template_name = 'mascotas/registroMascota.html'
+    fields = ['titulo', 'especie', 'edad', 'descripcion', 'telefonoContacto', 'emailContacto']
+    success_url = reverse_lazy('lista mascotas')
     
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(CrearMascota, self).form_valid(form)
+        form.instance.usuario = self.request.user
+        form.instance.imagenMascota = self.request.FILES.get('imagenMascota')
+        return super().form_valid(form)
 
 
+# CRUD MASCOTA
+class MascotasList(ListView):
+    model = Mascota
+    template_name = 'mascotas/listaMascotas.html'
+    
 
-# CRUD PERROS
+class MascotaDetail(LoginRequiredMixin, DetailView):
+    model = Mascota
+    context_object_name = 'mascota'
+    template_name = 'mascotas/detalleMascota.html'
+    
+class MascotaUpdate(LoginRequiredMixin, UpdateView):
+    model = Mascota
+    form_class = EditarMascotaForm
+    success_url = reverse_lazy('lista mascotas')
+    context_object_name = 'lista mascotas'
+    
+class MascotaDelete(LoginRequiredMixin, DeleteView):
+    model = Mascota
+    success_url = reverse_lazy('lista mascotas')
+    context_object_name = 'lista mascotas'
+    template_name = 'mascotas/listaMascotas.html'
+
+
+# LISTA PERROS
 class PerroList(LoginRequiredMixin, ListView):
     context_object_name = 'perros'
     queryset = Mascota.objects.filter(especie__startswith= 'perro')
     template_name = 'mascotas/listaPerros.html'
     
-class PerroDetail(LoginRequiredMixin, DetailView):
-    model = Mascota
-    context_object_name = 'perro'
-    template_name = 'mascotas/detallePerros.html'
     
-class PerroUpdate(LoginRequiredMixin, UpdateView):
-    model = Mascota
-    form_class = EditarMascotaForm
-    success_url = reverse_lazy('perros')
-    context_object_name = 'perro'
-    template_name = 'mascotas/editarPerros.html'
-    
-class PerroDelete(LoginRequiredMixin, DeleteView):
-    model = Mascota
-    success_url = reverse_lazy('perros')
-    context_object_name = 'perro'
-    template_name = 'mascotas/eliminadoPerros.html'
-    
-    
-    
-# CRUD GATOS
+# LISTA GATOS
 class GatoList(LoginRequiredMixin, ListView):
     context_object_name = 'gatos'
     queryset = Mascota.objects.filter(especie__startswith= 'gato')
     template_name = 'mascotas/listaGatos.html'
     
-class GatoDetail(LoginRequiredMixin, DetailView):
-    model = Mascota
-    context_object_name = 'gato'
-    template_name = 'mascotas/detalleGatos.html'
-    
-class GatoUpdate(LoginRequiredMixin, UpdateView):
-    model = Mascota
-    form_class = EditarMascotaForm
-    success_url = reverse_lazy('gatos')
-    context_object_name = 'gato'
-    template_name = 'mascotas/editarGatos.html'
-    
-class GatoDelete(LoginRequiredMixin, DeleteView):
-    model = Mascota
-    success_url = reverse_lazy('gatos')
-    context_object_name = 'gato'
-    template_name = 'mascotas/eliminadoGatos.html'
 
-
-
-# CRUD OTROS
+# LISTA OTROS
 class OtroList(LoginRequiredMixin, ListView):
     context_object_name = 'otros'
     queryset = Mascota.objects.filter(especie__startswith= 'otro')
     template_name = 'mascotas/listaOtros.html'
     
-class OtroDetail(LoginRequiredMixin, DetailView):
-    model = Mascota
-    context_object_name = 'otro'
-    template_name = 'mascotas/detalleOtro.html'
-    
-class OtroUpdate(LoginRequiredMixin, UpdateView):
-    model = Mascota
-    form_class = EditarMascotaForm
-    success_url = reverse_lazy('otros')
-    context_object_name = 'otro'
-    template_name = 'mascotas/editarOtros.html'
-    
-class OtroDelete(LoginRequiredMixin, DeleteView):
-    model = Mascota
-    success_url = reverse_lazy('otros')
-    context_object_name = 'otro'
-    template_name = 'mascotas/eliminadoOtros.html'
 

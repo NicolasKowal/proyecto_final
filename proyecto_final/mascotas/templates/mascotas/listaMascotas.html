@@ -1,27 +1,36 @@
-{% extends 'usuarios/index.html' %}
+{% extends 'usuarios/modeloheredable.html' %}
 
 {% load static %}
 
-{% block title %}
-    Mascotas
-{% endblock %}
+{% block title %}  Mascotas en adopción  {% endblock %}
 
 {% block main %}
-
-<style>
-    body {
-      margin: 20px;
-      background-size: cover;
-    }
-  
-    td {
-      padding: 10px;
-      line-height: 1.5;
-    }
-  </style>
-<p> LISTADO DE MASCOTAS </p>
-
-
-
-<p> </p>
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+      ESPECIE
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="{% url 'perros' %}">Perros</a></li>
+      <li><a class="dropdown-item" href="{% url 'gatos' %}">Gatos</a></li>
+      <li><a class="dropdown-item" href="{% url 'otros' %}">Otros</a></li>
+    </ul>
+  </div>
+<div class="row">
+    {% for mascota in object_list %}
+        <div class="card" style="width: 18rem;" >
+            <img src="{{mascota.imagenMascota.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ mascota.titulo }}</h5>
+            <h5 class="card-title">{{ mascota.especie }}</h5>
+            <p class="card-text">{{ mascota.descripcion }}</p>
+            <a href="{% url 'detalle mascota' mascota.id %}" class="btn btn-primary">Ver</a>
+            {% if mascota.usuario == request.user %}
+            <a href="{% url 'editar mascota' mascota.id %}" class="btn btn-primary">Editar</a>
+            {% endif %}
+            {% if mascota.usuario == request.user %}
+            <a href="{% url 'eliminar mascota' mascota.id %}" class="btn btn-primary">Borrar</a>
+            {% endif %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock main %}

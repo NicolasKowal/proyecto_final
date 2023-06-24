@@ -1,10 +1,8 @@
-{% extends 'usuarios/index.html' %}
+{% extends 'usuarios/modeloheredable.html' %}
 
 {% load static %}
 
-{% block title %}
-    Publicá tu mascota
-{% endblock %}
+{% block title %}      {% endblock %}
 
 {% block main %}
 
@@ -18,13 +16,12 @@
         }
 </style>
 <p> </p>
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Registrala!</button>
+   <p> <input type="file" name="imagenMascota"> </p>
+   <p> <button type="submit">Registrala!</button> </p> 
 </form>
-
-<p> </p>
 
 <p> </p>
 {% endblock main %}

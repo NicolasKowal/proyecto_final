@@ -1,0 +1,18 @@
+{% extends 'usuarios/modeloheredable.html' %}
+
+{% load static %}
+
+{% block title %}   Detalle   {% endblock %}
+
+{% block main %}
+<h1> {{ mascota.titulo }} </h1>
+<div class="card" style="width: 18rem;" >
+<img src="{{mascota.imagenMascota.url}}" class="card-img-top" alt="...">
+</div>
+<ul>
+    <p>Descripción: {{ mascota.descripcion }}</p>
+    <p>Email de contacto: {{ mascota.emailContacto }}</p>
+    <p>Teléfono de contacto: {{ mascota.telefonoContacto }}</p>
+    <p>Fecha de publicación: {{ mascota.fechaPublicacion }}</p>
+</ul>
+{% endblock main %}
