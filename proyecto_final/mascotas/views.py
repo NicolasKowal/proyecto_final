@@ -6,63 +6,62 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from mascotas.models import Mascota
-from mascotas.forms import EditarMascotaForm #NuevaMascotaForm
+
 
 # CRUD MASCOTA
 class CrearMascota(LoginRequiredMixin, CreateView):
     model = Mascota
     template_name = 'mascotas/registroMascota.html'
-    fields = ['titulo', 'especie', 'edad', 'descripcion', 'telefonoContacto', 'emailContacto']
+    fields = ['titulo', 'especie', 'edad', 'descripcion', 'telefonoContacto', 'emailContacto', 'imagenMascota']
     success_url = reverse_lazy('lista mascotas')
     
     def form_valid(self, form):
         form.instance.usuario = self.request.user
-        form.instance.imagenMascota = self.request.FILES.get('imagenMascota')
         return super().form_valid(form)
 
-
-# CRUD MASCOTA
 class MascotasList(ListView):
     model = Mascota
     template_name = 'mascotas/listaMascotas.html'
     
-
-class MascotaDetail(LoginRequiredMixin, DetailView):
+        
+class MascotaDetail(DetailView):
     model = Mascota
     context_object_name = 'mascota'
     template_name = 'mascotas/detalleMascota.html'
     
 class MascotaUpdate(LoginRequiredMixin, UpdateView):
     model = Mascota
-    form_class = EditarMascotaForm
+    fields = ['titulo', 'especie', 'edad', 'descripcion', 'telefonoContacto', 'emailContacto', 'imagenMascota']
+    context_object_name = 'mascota'
+    template_name = 'mascotas/editarMascota.html'
     success_url = reverse_lazy('lista mascotas')
-    context_object_name = 'lista mascotas'
+
     
 class MascotaDelete(LoginRequiredMixin, DeleteView):
     model = Mascota
+    context_object_name = 'mascota'
+    template_name = 'mascotas/eliminarMascota.html'
     success_url = reverse_lazy('lista mascotas')
-    context_object_name = 'lista mascotas'
-    template_name = 'mascotas/listaMascotas.html'
 
 
 # LISTA PERROS
 class PerroList(LoginRequiredMixin, ListView):
-    context_object_name = 'perros'
     queryset = Mascota.objects.filter(especie__startswith= 'perro')
+    context_object_name = 'perros'
     template_name = 'mascotas/listaPerros.html'
     
     
 # LISTA GATOS
 class GatoList(LoginRequiredMixin, ListView):
-    context_object_name = 'gatos'
     queryset = Mascota.objects.filter(especie__startswith= 'gato')
+    context_object_name = 'gatos'
     template_name = 'mascotas/listaGatos.html'
     
 
 # LISTA OTROS
 class OtroList(LoginRequiredMixin, ListView):
-    context_object_name = 'otros'
     queryset = Mascota.objects.filter(especie__startswith= 'otro')
+    context_object_name = 'otros'
     template_name = 'mascotas/listaOtros.html'
     
 

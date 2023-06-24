@@ -5,14 +5,32 @@
 {% block title %}   Detalle   {% endblock %}
 
 {% block main %}
-<h1> {{ mascota.titulo }} </h1>
-<div class="card" style="width: 18rem;" >
-<img src="{{mascota.imagenMascota.url}}" class="card-img-top" alt="...">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-3">
+                {% if mascota.imagenMascota %}
+                    <img src="{{ mascota.imagenMascota.url }}" class="card-img-top" alt="...">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-8">
+        <h1>{{ mascota.titulo }}</h1>
+        <ul>
+            <li><strong>Descripción:</strong> {{ mascota.descripcion }}</li>
+            <li><strong>Especie:</strong> {{ mascota.especie|lower|capfirst }}</li>
+            <li><strong>Email de contacto:</strong> {{ mascota.emailContacto }}</li>
+            <li><strong>Teléfono de contacto:</strong> {{ mascota.telefonoContacto }}</li>
+            <li><strong>Fecha de publicación:</strong> {{ mascota.fechaPublicacion }}</li>
+        </ul>
+        {% if mascota.usuario == request.user %}
+            <a href="{% url 'editar mascota' mascota.id %}" class="btn btn-primary">Editar</a>
+        {% endif %}
+        {% if mascota.usuario == request.user %}
+            <a href="{% url 'eliminar mascota' mascota.id %}" class="btn btn-primary">Borrar</a>
+        {% endif %}
+        <a class="btn btn-primary" href="{% url 'lista mascotas' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Volver</a>
+        </div>
+    </div>
 </div>
-<ul>
-    <p>Descripción: {{ mascota.descripcion }}</p>
-    <p>Email de contacto: {{ mascota.emailContacto }}</p>
-    <p>Teléfono de contacto: {{ mascota.telefonoContacto }}</p>
-    <p>Fecha de publicación: {{ mascota.fechaPublicacion }}</p>
-</ul>
 {% endblock main %}
