@@ -36,10 +36,9 @@
                 {% endif %}
 
                 {% if request.user.is_authenticated %}
+                <a class= "text large mb-4 mb-lg-0"> {{request.user.username}} <img height="40px" src="{{request.user.avatar.imagen.url}}"></a>
                 <a class="btn btn-primary" href="{% url 'EditarPerfil' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Mi perfil</a>
-                <a class="btn btn-primary" href="{% url 'List' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">DDD</a>
                 <a class="btn btn-primary" href="{% url 'Logout' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Logout</a>
-                <a class= "text large mb-4 mb-lg-0"> {{request.user.username}}   </a> <img height="40px" src="{{request.user.avatar.imagen.url}}">
                 {% endif %}
 
                 </div>

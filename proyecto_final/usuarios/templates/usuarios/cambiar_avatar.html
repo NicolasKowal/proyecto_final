@@ -1,0 +1,22 @@
+{% extends 'usuarios/modeloheredable.html' %} {% load static %} {% block title %}
+Formulario - Editar Perfil {% endblock title %} {% block main %}
+<style>
+  body {
+    margin: 20px;
+    background-size: cover;
+  }
+
+  td {
+    padding: 10px;
+    line-height: 1.5;
+  }
+</style>
+
+<h2>Cambiar Avatar</h2>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Guardar</button>
+</form>
+
+{% endblock main %}

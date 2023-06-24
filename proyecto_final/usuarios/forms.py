@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.hashers import make_password
+from .models import Avatar
 
 
 class UserRegisterForm(forms.ModelForm):
@@ -42,3 +43,22 @@ class EditPassword(UserChangeForm):
         if commit:
             user.save()
         return user
+
+
+
+
+
+
+
+
+
+
+
+
+
+class AvatarForm(forms.ModelForm):
+    avatar = forms.ImageField(widget=forms.FileInput)
+
+    class Meta:
+        model = Avatar
+        fields = ['avatar']
