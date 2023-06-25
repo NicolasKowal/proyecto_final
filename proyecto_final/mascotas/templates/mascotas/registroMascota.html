@@ -1,0 +1,27 @@
+{% extends 'usuarios/modeloheredable.html' %}
+
+{% load static %}
+
+{% block title %}      {% endblock %}
+
+{% block main %}
+
+<style>
+    body {
+            margin: 20px;
+    }
+    td {
+            padding: 10px;
+            line-height: 1.5;
+        }
+</style>
+<p> </p>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+   <p> <input type="file" name="imagenMascota"> </p>
+   <p> <button type="submit">Registrala!</button> </p> 
+</form>
+
+<p> </p>
+{% endblock main %}
