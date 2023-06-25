@@ -2,8 +2,50 @@
 
 {% load static %}
 
-{% block title %}      {% endblock %}
+{% block title %}  Perros  {% endblock %}
 
 {% block main %}
-
+<style>
+    .card-img-top {
+      object-fit: cover;
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+  
+  <div class="container">
+    <div class="dropdown mb-3">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        VER POR ESPECIE
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item" href="{% url 'lista mascotas' %}">Todos</a></li>
+        <li><a class="dropdown-item" href="{% url 'perros' %}">Perros</a></li>
+        <li><a class="dropdown-item" href="{% url 'gatos' %}">Gatos</a></li>
+        <li><a class="dropdown-item" href="{% url 'otros' %}">Otros</a></li>
+      </ul>
+    </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% for mascota in object_list %}
+          <div class="col">
+            <div class="card h-100">
+              {% if mascota.imagenMascota %}
+                <img src="{{mascota.imagenMascota.url}}" class="card-img-top" alt="...">
+              {% endif %}
+              <div class="card-body">
+                <h5 class="card-title">{{ mascota.titulo }}</h5>
+                <p class="card-text">{{ mascota.descripcion|truncatechars:100 }}</p>
+                <a href="{% url 'detalle mascota' mascota.id %}" class="btn btn-primary">Ver</a>
+                {% if mascota.usuario == request.user %}
+                  <a href="{% url 'editar mascota' mascota.id %}" class="btn btn-primary">Editar</a>
+                {% endif %}
+                {% if mascota.usuario == request.user %}
+                  <a href="{% url 'eliminar mascota' mascota.id %}" class="btn btn-primary">Borrar</a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock main %}
