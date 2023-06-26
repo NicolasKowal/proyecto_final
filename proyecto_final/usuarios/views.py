@@ -22,7 +22,7 @@ def login_request(request):
             user = authenticate(username=usuario, password=contra)
             if user is not None:
                 login(request, user)
-                return render(request, "usuarios/base.html", {"mensaje": f"Bienvenido {usuario}"})
+                return render(request, "usuarios/base.html", {"mensaje": f"{usuario}"})
             else:
                 return render(request, "usuarios/base.html", {"mensaje": "Datos incorrectos"})
         else:
@@ -54,7 +54,7 @@ def register(request):
 def main(request):
     return render(request, 'usuarios/pagina_principal.html')
 
-
+@login_required
 def index(request):
     return render(request, 'usuarios/index.html')
 
@@ -100,3 +100,7 @@ def cambiarAvatar(request):
         form = AvatarForm(instance=request.user)
     
     return render(request, 'usuarios/cambiar_avatar.html', {'form': form} )
+
+
+def AboutUs (request):
+    return render(request, 'usuarios/aboutus.html')

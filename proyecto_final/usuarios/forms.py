@@ -23,6 +23,11 @@ class EditarPerfil(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email']
+        labels = {
+            'first_name': 'Nombre',
+            'last_name': 'Apellido',
+            'email' : 'E-Mail'
+        }
 
 
 class EditPassword(UserChangeForm):
@@ -43,17 +48,6 @@ class EditPassword(UserChangeForm):
         if commit:
             user.save()
         return user
-
-
-
-
-
-
-
-
-
-
-
 
 
 class AvatarForm(forms.ModelForm):

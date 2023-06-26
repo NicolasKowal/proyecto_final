@@ -11,7 +11,7 @@ urlpatterns = [
     path('Pagina_principal', views.main, name ='main'),
     path('Editar_perfil', views.editarPerfil, name='editarPerfil'),
     path('Editar_contrasena', views.editarPass, name='editarContrasena'),
-    
+    path('AcercaDe', views.AboutUs, name='AboutUs'),
     path('cambiar-avatar', views.cambiarAvatar, name='cambiar_avatar'),
 
     
