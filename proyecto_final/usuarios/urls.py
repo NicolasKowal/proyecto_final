@@ -13,6 +13,8 @@ urlpatterns = [
     path('Editar_contrasena', views.editarPass, name='editarContrasena'),
     path('AcercaDe', views.AboutUs, name='AboutUs'),
     path('cambiar-avatar', views.cambiarAvatar, name='cambiar_avatar'),
+    path('Not-found', views.Error, name='error'),
+    
 
     
     

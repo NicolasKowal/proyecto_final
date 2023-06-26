@@ -104,3 +104,9 @@ def cambiarAvatar(request):
 
 def AboutUs (request):
     return render(request, 'usuarios/aboutus.html')
+
+def Error(request):
+    return render(request, 'usuarios/404.html', status= 404)
+
+def error_500(request):
+    return render(request, 'usuarios/500.html', status= 500)
