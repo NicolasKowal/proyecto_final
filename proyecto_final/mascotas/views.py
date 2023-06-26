@@ -4,6 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 
 from mascotas.models import Mascota
 
@@ -14,6 +15,7 @@ class CrearMascota(LoginRequiredMixin, CreateView):
     template_name = 'mascotas/registroMascota.html'
     fields = ['titulo', 'especie', 'edad', 'descripcion', 'telefonoContacto', 'emailContacto', 'imagenMascota']
     success_url = reverse_lazy('lista mascotas')
+    login_url = reverse_lazy('Login')
     
     def form_valid(self, form):
         form.instance.usuario = self.request.user
@@ -24,10 +26,11 @@ class MascotasList(ListView):
     template_name = 'mascotas/listaMascotas.html'
     
         
-class MascotaDetail(DetailView):
+class MascotaDetail(LoginRequiredMixin, DetailView):
     model = Mascota
     context_object_name = 'mascota'
     template_name = 'mascotas/detalleMascota.html'
+    login_url = reverse_lazy('Login')
     
 class MascotaUpdate(LoginRequiredMixin, UpdateView):
     model = Mascota
@@ -45,21 +48,21 @@ class MascotaDelete(LoginRequiredMixin, DeleteView):
 
 
 # LISTA PERROS
-class PerroList(LoginRequiredMixin, ListView):
+class PerroList(ListView):
     queryset = Mascota.objects.filter(especie__startswith= 'perro')
     context_object_name = 'perros'
     template_name = 'mascotas/listaPerros.html'
     
     
 # LISTA GATOS
-class GatoList(LoginRequiredMixin, ListView):
+class GatoList(ListView):
     queryset = Mascota.objects.filter(especie__startswith= 'gato')
     context_object_name = 'gatos'
     template_name = 'mascotas/listaGatos.html'
     
 
 # LISTA OTROS
-class OtroList(LoginRequiredMixin, ListView):
+class OtroList(ListView):
     queryset = Mascota.objects.filter(especie__startswith= 'otro')
     context_object_name = 'otros'
     template_name = 'mascotas/listaOtros.html'
