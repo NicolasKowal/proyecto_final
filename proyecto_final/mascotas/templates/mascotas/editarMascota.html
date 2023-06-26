@@ -5,12 +5,124 @@
 {% block title %}   Editar mascota   {% endblock %}
 
 {% block main %}
-<p>
+<!-- <p>
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Actualizar">
 </form>
-</p>
+</p> -->
+<style>
+    .container {
+      margin: 100px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 20px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    .form-group input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    .form-group input[type="file"] {
+    position: relative;
+  }
+
+  .form-group input[type="file"]::-webkit-file-upload-button {
+    width: auto;
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .form-group input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #45a049;
+  }
+
+  .form-group input[type="file"]::-webkit-clear-button {
+    font-size: 14px;
+    cursor: pointer;
+  }
+</style>
+
+<div class="container">
+        <h1>Editar Mascota</h1>
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+      <div class="form-group">
+        <label for="id_titulo">Título</label>
+        {{ form.titulo }}
+        {% if form.titulo.errors %}
+        <span class="error">{{ form.titulo.errors|join:", " }}</span>
+        {% endif %}
+        </div>
+        <div class="form-group">
+      <label for="id_especie">Especie</label>
+      {{ form.especie }}
+      {% if form.especie.errors %}
+      <span class="error">{{ form.especie.errors|join:", " }}</span>
+        {% endif %}
+      </div>
+        <div class="form-group">
+    <label for="id_edad">Edad</label>
+    {{ form.edad }}
+    {% if form.edad.errors %}
+    <span class="error">{{ form.edad.errors|join:", " }}</span>
+      {% endif %}
+    </div>
+    <div class="form-group">
+  <label for="id_descripcion">Descripción</label>
+  {{ form.descripcion }}
+  {% if form.descripcion.errors %}
+  <span class="error">{{ form.descripcion.errors|join:", " }}</span>
+    {% endif %}
+  </div>
+  <div class="form-group">
+<label for="id_telefonoContacto">Teléfono de contacto</label>
+{{ form.telefonoContacto }}
+{% if form.telefonoContacto.errors %}
+<span class="error"> {{ form.telefonoContacto.errors|join:", " }}</span>
+        {% endif %}
+</div>
+<div class="form-group">
+<label for="id_emailContacto">Email</label>
+{{ form.emailContacto }}
+{% if form.emailContacto.errors %}
+<span class="error"> {{ form.emailContacto.errors|join:", " }}</span>
+        {% endif %}
+</div>
+<div class="form-group">
+<label for="id_imagenMascota">Foto</label>
+{{ form.imagenMascota }}
+{% if form.imagenMascota.errors %}
+<span class="error"> {{ form.imagenMascota.errors|join:", " }}</span>
+{% endif %}
+</div>
+<input type="submit" value="Actualizar" style="background-color: var(--bs-orange); border-color: var(--bs-orange);" class="btn btn-primary">
+</form>
+</div>
+<div>
 <a class="btn btn-primary" href="{% url 'lista mascotas' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Volver</a>
+</div>
 {% endblock main %}
