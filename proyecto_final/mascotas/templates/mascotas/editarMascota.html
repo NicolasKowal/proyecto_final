@@ -5,17 +5,8 @@
 {% block title %}   Editar mascota   {% endblock %}
 
 {% block main %}
-<!-- <p>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Actualizar">
-</form>
-</p> -->
+
 <style>
-    .container {
-      margin: 100px;
-    }
     
     .form-group {
       margin-bottom: 20px;
@@ -67,6 +58,7 @@
 </style>
 
 <div class="container">
+        <p></p>
         <h1>Editar Mascota</h1>
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}

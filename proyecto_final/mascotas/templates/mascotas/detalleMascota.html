@@ -8,15 +8,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4">
+            <p></p>
+
             <div class="card mb-3">
+                
                 {% if mascota.imagenMascota %}
                     <img src="{{ mascota.imagenMascota.url }}" class="card-img-top" alt="...">
                 {% endif %}
             </div>
         </div>
+        
         <div class="col-md-8">
+        <p></p>
         <h1>{{ mascota.titulo }}</h1>
-        <ul>
+        <ul style="font-size: 1.3em; line-height: 1.7;">
             <li><strong>Descripción:</strong> {{ mascota.descripcion }}</li>
             <li><strong>Especie:</strong> {{ mascota.especie|lower|capfirst }}</li>
             <li><strong>Email de contacto:</strong> {{ mascota.emailContacto }}</li>
@@ -24,10 +29,10 @@
             <li><strong>Fecha de publicación:</strong> {{ mascota.fechaPublicacion }}</li>
         </ul>
         {% if mascota.usuario == request.user %}
-            <a href="{% url 'editar mascota' mascota.id %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'editar mascota' mascota.id %}" class="btn btn-primary" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Editar</a>
         {% endif %}
         {% if mascota.usuario == request.user %}
-            <a href="{% url 'eliminar mascota' mascota.id %}" class="btn btn-primary">Borrar</a>
+            <a href="{% url 'eliminar mascota' mascota.id %}" class="btn btn-primary" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Borrar</a>
         {% endif %}
         <a class="btn btn-primary" href="{% url 'lista mascotas' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Volver</a>
         </div>
