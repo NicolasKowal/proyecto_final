@@ -1,29 +1,18 @@
-from django.urls import path, include
-from usuarios import views, viewscrud
+from django.urls import path
+from usuarios import views
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('login', views.login_request, name="Login"),
     path('register', views.register, name='Register'),
-    path('logout', LogoutView.as_view(template_name='usuarios/logout.html'), name='Logout'),
-    path('editarPerfil', views.editarPerfil, name="EditarPerfil"), 
+    path('logout', LogoutView.as_view(
+        template_name='usuarios/logout.html'), name='Logout'),
+    path('editarPerfil', views.editarPerfil, name="EditarPerfil"),
     path('', views.index, name='index'),
-    path('Pagina_principal', views.main, name ='main'),
+    path('Pagina_principal', views.main, name='main'),
     path('Editar_perfil', views.editarPerfil, name='editarPerfil'),
-    path('Editar_contrasena', views.editarPass, name='editarContrasena'),
-    path('AcercaDe', views.AboutUs, name='AboutUs'),
+    path('Editar_contrasena', views.editarContraseña, name='editarContrasena'),
+    path('AcercaDe', views.aboutUs, name='AboutUs'),
     path('cambiar-avatar', views.cambiarAvatar, name='cambiar_avatar'),
-    path('Not-found', views.Error, name='error'),
-    
-
-    
-    
-]
-
-urlpatterns += [
-    path('d', viewscrud.User_List.as_view(), name='List'),
-    path('<int:pk>', viewscrud.User_Detail.as_view(), name='Detail'),
-    path('nuevo', viewscrud.User_View.as_view(), name='New'),
-    path('editar/<int:pk>', viewscrud.User_Update.as_view(), name='Edit'),
-    path('borrar/<int:pk>', viewscrud.User_Delete.as_view(), name='Delete'),
+    path('Not-found', views.error, name='error')
 ]

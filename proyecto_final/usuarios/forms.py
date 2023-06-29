@@ -26,11 +26,11 @@ class EditarPerfil(forms.ModelForm):
         labels = {
             'first_name': 'Nombre',
             'last_name': 'Apellido',
-            'email' : 'E-Mail'
+            'email': 'E-Mail'
         }
 
 
-class EditPassword(UserChangeForm):
+class EditarContraseña(UserChangeForm):
     password1 = forms.CharField(
         label='Contraseña', widget=forms.PasswordInput)
     password2 = forms.CharField(
@@ -50,7 +50,7 @@ class EditPassword(UserChangeForm):
         return user
 
 
-class AvatarForm(forms.ModelForm):
+class avatarForm(forms.ModelForm):
     avatar = forms.ImageField(widget=forms.FileInput)
 
     class Meta:

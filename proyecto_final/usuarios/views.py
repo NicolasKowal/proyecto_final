@@ -7,10 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Avatar
-from .forms import UserRegisterForm, EditarPerfil, EditPassword, AvatarForm
+from .forms import UserRegisterForm, EditarPerfil, EditarContraseña, avatarForm
 
 from django.contrib.auth.models import User
-
 
 
 def login_request(request):
@@ -22,7 +21,7 @@ def login_request(request):
             user = authenticate(username=usuario, password=contra)
             if user is not None:
                 login(request, user)
-                return render(request, "usuarios/base.html", {"mensaje": f"{usuario}"})
+                return render(request, "usuarios/base.html", {"mensaje": f"Bienvenido {usuario}"})
             else:
                 return render(request, "usuarios/base.html", {"mensaje": "Datos incorrectos"})
         else:
@@ -47,12 +46,13 @@ def register(request):
                 form.add_error('password2', 'Las contraseñas no coinciden.')
     else:
         form = UserRegisterForm()
-     
+
     return render(request, "usuarios/registro.html", {"form": form})
 
 
 def main(request):
     return render(request, 'usuarios/pagina_principal.html')
+
 
 @login_required
 def index(request):
@@ -73,14 +73,14 @@ def editarPerfil(request):
 
 
 @login_required
-def editarPass(request):
+def editarContraseña(request):
     if request.method == 'POST':
-        form = EditPassword(request.POST, instance=request.user)
+        form = EditarContraseña(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('main')
     else:
-        form = EditPassword(instance=request.user)
+        form = EditarContraseña(instance=request.user)
 
     return render(request, 'usuarios/editarpassw.html', {'form': form})
 
@@ -88,25 +88,28 @@ def editarPass(request):
 @login_required
 def cambiarAvatar(request):
     if request.method == 'POST':
-        form = AvatarForm(request.POST, request.FILES, instance=request.user)
+        form = avatarForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            avatar_anterior=Avatar.objects.filter(user=request.user)
+            avatar_anterior = Avatar.objects.filter(user=request.user)
             if (len(avatar_anterior) > 0):
                 avatar_anterior.delete()
-            avatar_nuevo = Avatar(user = request.user, imagen = form.cleaned_data["avatar"])
+            avatar_nuevo = Avatar(
+                user=request.user, imagen=form.cleaned_data["avatar"])
             avatar_nuevo.save()
             return redirect('main')
     else:
-        form = AvatarForm(instance=request.user)
-    
-    return render(request, 'usuarios/cambiar_avatar.html', {'form': form} )
+        form = avatarForm(instance=request.user)
+
+    return render(request, 'usuarios/cambiar_avatar.html', {'form': form})
 
 
-def AboutUs (request):
+def aboutUs(request):
     return render(request, 'usuarios/aboutus.html')
 
-def Error(request):
-    return render(request, 'usuarios/404.html', status= 404)
 
-def error_500(request):
-    return render(request, 'usuarios/500.html', status= 500)
+def error(request):
+    return render(request, 'usuarios/404.html', status=404)
+
+
+def error500(request):
+    return render(request, 'usuarios/500.html', status=500)
