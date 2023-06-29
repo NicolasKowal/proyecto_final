@@ -54,7 +54,7 @@ def main(request):
     return render(request, 'usuarios/pagina_principal.html')
 
 
-
+  
 def index(request):
     return render(request, 'usuarios/index.html')
 
