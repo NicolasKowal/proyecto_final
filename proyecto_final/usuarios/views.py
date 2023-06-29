@@ -54,7 +54,6 @@ def main(request):
     return render(request, 'usuarios/pagina_principal.html')
 
 
-@login_required
 def index(request):
     return render(request, 'usuarios/index.html')
 
