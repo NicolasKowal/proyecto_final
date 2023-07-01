@@ -1,34 +1,30 @@
-{% extends 'usuarios/modeloheredable.html' %}
-
-{% load static %}
-
-{% block title %}
-    Log-in
-{% endblock %}
-
-{% block main %}
+{% extends 'usuarios/modeloheredable.html' %} {% load static %} {% block title%} Log-in {% endblock %} {% block main %}
 
 <style>
-    body {
-      margin-left: 20px;
-      margin-right: 20px;
-      background-size: cover;
-    }
-  
-    td {
-      padding: 10px;
-      line-height: 1.5;
-    }
-  </style>
-<p> </p>
+  body {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-size: cover;
+  }
+
+  td {
+    padding: 10px;
+    line-height: 1.5;
+  }
+</style>
+<p></p>
 
 <form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Iniciar sesion </button>
-    <p></p>
-    <a class="btn btn-primary" href="{% url 'Register' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Registrate</a>
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Iniciar sesion</button>
+  <p></p>
+  <a
+    class="btn btn-primary"
+    href="{% url 'Register' %}"
+    style="background-color: var(--bs-orange); border-color: var(--bs-orange)"
+    >Registrate</a
+  >
 </form>
 
-<p> </p>
+<p></p>
 {% endblock main %}

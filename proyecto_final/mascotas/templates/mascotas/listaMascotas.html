@@ -26,11 +26,12 @@
       VER POR ESPECIE
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="{% url 'lista mascotas' %}">Todos</a></li>
+      <li><a class="dropdown-item" href="{% url 'lista mascotas' %}">Todos</a></li>
       <li><a class="dropdown-item" href="{% url 'perros' %}">Perros</a></li>
       <li><a class="dropdown-item" href="{% url 'gatos' %}">Gatos</a></li>
       <li><a class="dropdown-item" href="{% url 'otros' %}">Otros</a></li>
     </ul>
+    
   </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for mascota in object_list %}

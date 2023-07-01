@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title> {% block tittle %} Choque la pata {% endblock tittle %} </title>
+        <title> {%block title%} Choque la pata {%endblock title%} </title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href='{% static "usuarios/assets/favicon.ico" %}'/>
         <!-- Bootstrap icons-->
@@ -40,7 +40,6 @@
                 <a class="btn btn-primary" href="{% url 'EditarPerfil' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Mi perfil</a>
                 <a class="btn btn-primary" href="{% url 'Logout' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Logout</a>
                 {% endif %}
-
                 </div>
             </div>
             
