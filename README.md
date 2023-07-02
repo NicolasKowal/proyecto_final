@@ -16,3 +16,4 @@ Una vez que el usuario está logueado el botón "Login" y "Registrarme" ya no se
 - Usuario: se muestra el nombre de usuario y avatar (si es que tiene).
 - Mi perfil: lleva a un formulario de edición del usuario, desde donde se modifica nombre, apellido, email, contraseña y avatar.
 - Logout: cierra la sesión y muestra una vista con opciones de login y registrarse.
+LINK AL VIDEO SUBIDO A YOUTUBE https://youtu.be/wJlrSCcDxFw
