@@ -1,5 +1,4 @@
-{% extends 'usuarios/modeloheredable.html' %} {% load static %} {% block title %}
-Formulario - Editar Perfil {% endblock title %} {% block main %}
+{% extends 'usuarios/modeloheredable.html' %} {% load static %} {% block title%} Editar Avatar {% endblock title %} {% block main %}
 <style>
   body {
     margin-left: 20px;
@@ -15,8 +14,7 @@ Formulario - Editar Perfil {% endblock title %} {% block main %}
 
 <h2>Cambiar Avatar</h2>
 <form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
+  {% csrf_token %} {{ form.as_p }}
   <button type="submit">Guardar</button>
 </form>
 

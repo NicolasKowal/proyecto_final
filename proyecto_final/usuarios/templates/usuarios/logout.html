@@ -1,30 +1,32 @@
-{% extends 'usuarios/modeloheredable.html' %}
-
-{% load static %}
-
-{% block title %}
-    Logout
-{% endblock title %}
-
-{% block main %}
+{% extends 'usuarios/modeloheredable.html' %} {% load static %} {% block title%} Logout {% endblock title %} {% block main %}
 
 <style>
-    body {
-        margin-left: 20px;
-        margin-right: 20px;
-        background-size: cover;
-    }
-    td {
-            padding: 10px;
-            line-height: 1.5;
-        }
+  body {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-size: cover;
+  }
+  td {
+    padding: 10px;
+    line-height: 1.5;
+  }
 </style>
-<p> </p>
+<p></p>
 
 <h1>Te has deslogueado...</h1>
 
-<a class="btn btn-primary" href="{% url 'Login' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Login</a>
-<a class="btn btn-primary" href="{% url 'Register' %}" style="background-color: var(--bs-orange); border-color: var(--bs-orange);">Registrate</a>
+<a
+  class="btn btn-primary"
+  href="{% url 'Login' %}"
+  style="background-color: var(--bs-orange); border-color: var(--bs-orange)"
+  >Login</a
+>
+<a
+  class="btn btn-primary"
+  href="{% url 'Register' %}"
+  style="background-color: var(--bs-orange); border-color: var(--bs-orange)"
+  >Registrate</a
+>
 
-<p> </p>
+<p></p>
 {% endblock main %}
