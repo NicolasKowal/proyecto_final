@@ -1,0 +1,104 @@
+{% extends 'usuarios/modeloheredable.html' %} {% load static %} {% block title%} Pagina Principal {% endblock title %} {% block main %}
+<style>
+  body {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-size: cover;
+  }
+
+  td {
+    padding: 10px;
+    line-height: 1.5;
+  }
+</style>
+
+<h1 style="text-align: center">
+  Bienvenido a nuestra página de adopción de mascotas
+</h1>
+
+<img
+  style="display: block; margin-left: auto; margin-right: auto"
+  width="600"
+  height="400"
+  src="media\imagenes\f.elconfidencial.com_original_0e0_2f8_8a6_0e02f88a61b912a158f4dfc6f0faf54c.jpg"
+/>
+
+<p></p>
+
+<p>
+  En nuestra organización, creemos firmemente en la importancia de adoptar
+  mascotas en lugar de comprar. Al hacerlo, estás cambiando la vida de un animal
+  necesitado y brindándole una segunda oportunidad.
+</p>
+
+<h2>¿Por qué adoptar una mascota?</h2>
+
+<p>
+  1. Salvas una vida: Cada vez que adoptas una mascota, estás brindando un hogar
+  a un animal que ha sido abandonado, maltratado o que se encuentra en un
+  refugio. Le das la oportunidad de tener una vida feliz y llena de amor.
+</p>
+
+<p>
+  2. Contribuyes a reducir el problema de la sobre-población: Existen millones
+  de mascotas que necesitan un hogar. Al adoptar, estás ayudando a reducir el
+  número de animales sin hogar y a disminuir el problema de la sobre-población
+  en refugios y calles.
+</p>
+
+<p>
+  3. Mascotas saludables y vacunadas: Muchas organizaciones de adopción se
+  encargan de proporcionar los cuidados médicos necesarios a las mascotas antes
+  de ser adoptadas. Esto incluye vacunación, desparasitación y esterilización,
+  lo cual asegura que tu nueva mascota esté en buena salud.
+</p>
+
+<p>
+  4. Gran variedad de mascotas: En nuestra página, encontrarás una amplia
+  variedad de mascotas esperando un hogar. Desde perros y gatos hasta conejos,
+  aves y otros animales de compañía. Seguramente encontrarás el compañero
+  perfecto para ti y tu familia.
+</p>
+
+<h2>¡Adopta hoy mismo!</h2>
+
+<p>
+  No esperes más para hacer la diferencia en la vida de un animal. Visita
+  nuestro catálogo de mascotas disponibles para adopción y encuentra a tu nuevo
+  amigo de cuatro patas. Juntos, podemos darles un hogar amoroso y una vida
+  llena de alegría.
+</p>
+
+<p>
+  <a
+    class="btn btn-primary"
+    href="{% url 'lista mascotas' %}"
+    style="background-color: var(--bs-orange); border-color: var(--bs-orange)"
+    >Adoptar</a
+  >
+</p>
+
+<h2>¿Quieres dar en adopción a tu mascota?</h2>
+
+<p>
+  Si actualmente tienes una mascota que necesitas dar en adopción, podemos
+  ayudarte a encontrarle un hogar amoroso. Nuestro equipo trabajará contigo para
+  asegurarnos de que tu mascota sea colocada en un ambiente seguro y adecuado.
+  ¡Contáctanos hoy mismo para obtener más información!
+</p>
+
+<p>
+  <a
+    class="btn btn-primary"
+    href="{% url 'crear mascota' %}"
+    style="background-color: var(--bs-orange); border-color: var(--bs-orange)"
+    >Dar en adopcion</a
+  >
+</p>
+
+<p>
+  ¡Gracias por considerar la adopción y por ser parte del cambio positivo en la
+  vida de estos maravillosos seres!
+</p>
+
+{% endblock main %}
